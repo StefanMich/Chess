@@ -1,0 +1,482 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Stufkan</name>
+    </assembly>
+    <members>
+        <member name="T:Stufkan.Game.TurnControl">
+            <summary>
+            A class that keeps track of the team having the turn
+            </summary>
+        </member>
+        <member name="F:Stufkan.Game.TurnControl.NextMethod">
+            <summary>
+            The function to use for finding the next player
+            </summary>
+        </member>
+        <member name="F:Stufkan.Game.TurnControl.Teams">
+            <summary>
+            A list of all the teams present in the game
+            </summary>
+        </member>
+        <member name="F:Stufkan.Game.TurnControl.Q">
+            <summary>
+            A queue with all the teams present in the game
+            </summary>
+        </member>
+        <member name="F:Stufkan.Game.TurnControl.CurrentTeam">
+            <summary>
+            The team having the turn
+            </summary>
+        </member>
+        <member name="M:Stufkan.Game.TurnControl.#ctor(Stufkan.Game.Team,Stufkan.Game.Team[])">
+            <summary>
+            Instantiates a turncontrol with a startTeam and a number of teams
+            </summary>
+            <param name="startTeam">The team to begin</param>
+            <param name="team">The other teams in the game</param>
+        </member>
+        <member name="M:Stufkan.Game.TurnControl.#ctor(System.Func{Stufkan.Game.Team},Stufkan.Game.Team,Stufkan.Game.Team[])">
+            <summary>
+            Instantiates a turncontrol with a startTeam, a number of teams and a method to find the next player
+            </summary>
+            <param name="nextMethod">A method that returns the next player</param>
+            <param name="startTeam">The team to begin</param>
+            <param name="team">The other teams in the game</param>
+        </member>
+        <member name="M:Stufkan.Game.TurnControl.NextPlayer">
+            <summary>
+            Uses the 
+            </summary>
+        </member>
+        <member name="M:Stufkan.Game.TurnControl.rotation">
+            <summary>
+            The standard method to decide the next player. Rotates the queue.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Stufkan.Game.GenericBoard">
+            <summary>
+            Usercontrol depicting a binary grid. Cells with value 1 is painted with the alivecolor while cells with the value 0 are painted with the deadcolro
+            </summary>
+        </member>
+        <member name="F:Stufkan.Game.GenericBoard.grid">
+            <summary>
+            The grid currently shown in the board
+            </summary>
+        </member>
+        <member name="F:Stufkan.Game.GenericBoard.bgGrid">
+            <summary>
+            The grid containing the background
+            </summary>
+        </member>
+        <member name="M:Stufkan.Game.GenericBoard.#ctor">
+            <summary>
+            Creates a standard board with an empty grid with 5x5 rows
+            </summary>
+        </member>
+        <member name="M:Stufkan.Game.GenericBoard.#ctor(Stufkan.Game.Piece[0:,0:])">
+            <summary>
+            Creates a board with the specified grid
+            </summary>
+            <param name="grid">The grid to show in the board</param>
+        </member>
+        <member name="M:Stufkan.Game.GenericBoard.#ctor(Stufkan.Game.Piece[0:,0:],System.Drawing.Color)">
+            <summary>
+            Creates a board with the specified grid and the specified colors for the dead and live cells
+            </summary>
+            <param name="grid">The grid to show in the board</param>
+            <param name="background">The color to paint the background</param>
+        </member>
+        <member name="M:Stufkan.Game.GenericBoard.#ctor(Stufkan.Game.Piece[0:,0:],System.Drawing.Color,Stufkan.Game.Piece[0:,0:])">
+            <summary>
+            Creates a board with the specified grid and the specified colors for the dead and live cells as well as the bgGrid as background
+            </summary>
+            <param name="grid">The grid to show in the board</param>
+            <param name="background">The color to paint the background</param>
+            <param name="bgGrid">The grid depicting the background</param>
+        </member>
+        <member name="M:Stufkan.Game.GenericBoard.SetCell(System.Drawing.Point,Stufkan.Game.Piece)">
+            <summary>
+            /// Sets the cell at the point cell in the current grid
+            </summary>
+            <param name="cell">The cell to set the value</param>
+            <param name="piece">The piece to place at the cell</param>
+        </member>
+        <member name="M:Stufkan.Game.GenericBoard.ResetSetCell(System.Drawing.Point)">
+            <summary>
+            Removes the Piece from the cell
+            </summary>
+            <param name="cell"></param>
+        </member>
+        <member name="M:Stufkan.Game.GenericBoard.DrawBoard(System.Drawing.Graphics,System.Int32)">
+            <summary>
+            Draws the current grid
+            </summary>
+            <param name="gfx">The Graphics instance to draw</param>
+            <param name="height">The height of the board</param>
+        </member>
+        <member name="M:Stufkan.Game.GenericBoard.DrawGrid(System.Drawing.Graphics,Stufkan.Game.Piece[0:,0:],System.Drawing.SolidBrush,System.Int32)">
+            <summary>
+            Draws a 
+            </summary>
+            <param name="gfx"></param>
+            <param name="grid"></param>
+            <param name="bgBrush"></param>
+            <param name="pensize"></param>
+        </member>
+        <member name="M:Stufkan.Game.GenericBoard.DrawBackground(System.Drawing.Graphics,System.Int32)">
+            <summary>
+            Draws the background color in all cells
+            </summary>
+            <param name="gfx">The graphic to draw the background on</param>
+            <param name="pensize">The size of the pen</param>
+        </member>
+        <member name="M:Stufkan.Game.GenericBoard.DrawBorder(System.Drawing.Graphics,System.Drawing.Pen)">
+            <summary>
+            Draws the border in an appropriate size to the area.
+            </summary>
+            <param name="gfx">The graphic to draw the border on</param>
+            <param name="border">The pen to draw the border with</param>
+        </member>
+        <member name="M:Stufkan.Game.GenericBoard.getCellFromPoint(System.Drawing.Point)">
+            <summary>
+            Gets the coordinates to the cell at the pixel p
+            </summary>
+            <param name="p">The coordinates to the pixel in question</param>
+            <returns>A Point representing the coordinates to the cell where p exists</returns>
+        </member>
+        <member name="M:Stufkan.Game.GenericBoard.CellExists(System.Drawing.Point)">
+            <summary>
+            Returns if the cell at p exists
+            </summary>
+            <param name="p">A point containing the coordinates to the cell</param>
+            <returns></returns>
+        </member>
+        <member name="M:Stufkan.Game.GenericBoard.Reset">
+            <summary>
+            Resets the grid so every cell is dead
+            </summary>
+        </member>
+        <member name="M:Stufkan.Game.GenericBoard.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Paints the control with the grid
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Stufkan.Game.GenericBoard.changePattern(Stufkan.Game.BoardPattern)">
+            <summary>
+            Changes the pattern shown by the board to the specified pattern
+            </summary>
+            <param name="pattern">The pattern to show</param>
+        </member>
+        <member name="M:Stufkan.Game.GenericBoard.solidModel(System.Drawing.Color)">
+            <summary>
+            Returns a bitmap of a solid canvas with the assigned color
+            </summary>
+            <param name="color">The color to fill the bitmap</param>
+            <returns>A single colored bitmap</returns>
+        </member>
+        <member name="M:Stufkan.Game.GenericBoard.Board_Resize(System.Object,System.EventArgs)">
+            <summary>
+            Forces the board to be square when the control is resized
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="F:Stufkan.Game.GenericBoard.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Stufkan.Game.GenericBoard.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Stufkan.Game.GenericBoard.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:Stufkan.Game.GenericBoard.BackgroundColor">
+            <summary>
+            The color to draw dead cells
+            </summary>
+        </member>
+        <member name="P:Stufkan.Game.GenericBoard.Border">
+            <summary>
+            If the control should draw a border around the cells
+            </summary>
+        </member>
+        <member name="P:Stufkan.Game.GenericBoard.Rows">
+            <summary>
+            The number of rows in to show
+            </summary>
+        </member>
+        <member name="T:Stufkan.Game.BoardPattern">
+            <summary>
+            A class representing a GameOfLife pattern, with a grid and a name
+            </summary>
+        </member>
+        <member name="M:Stufkan.Game.BoardPattern.#ctor">
+            <summary>
+            Creates a LifePattern without a pattern
+            </summary>
+        </member>
+        <member name="M:Stufkan.Game.BoardPattern.#ctor(System.String,Stufkan.Game.Piece[0:,0:])">
+            <summary>
+            Creates a LifePattern with a name and a grid
+            </summary>
+            <param name="name">The name describing the pattern</param>
+            <param name="grid">The grid depicting the pattern</param>
+        </member>
+        <member name="P:Stufkan.Game.BoardPattern.Grid">
+            <summary>
+            Gets the grid depicting the pattern
+            </summary>
+        </member>
+        <member name="P:Stufkan.Game.BoardPattern.Name">
+            <summary>
+            Gets the name of the pattern
+            </summary>
+        </member>
+        <member name="T:Stufkan.Game.PieceExtension">
+            <summary>
+            Contains a method to cast an array of one type to an array of another type
+            </summary>
+        </member>
+        <member name="M:Stufkan.Game.PieceExtension.CastArray``2(``0[0:,0:],``1[0:,0:]@)">
+            <summary>
+            Copies all the pieces from an array to the output array
+            </summary>
+            <typeparam name="T">The type to copy from</typeparam>
+            <typeparam name="R">The type to copy to</typeparam>
+            <param name="array">The array to copy from</param>
+            <param name="result">The array to copy to</param>
+        </member>
+        <member name="T:Stufkan.Game.Piece">
+            <summary>
+            An interface describing a piece able to be placed on the board
+            </summary>
+        </member>
+        <member name="M:Stufkan.Game.Piece.#ctor(System.String,Stufkan.Game.Team,System.Drawing.Bitmap)">
+            <summary>
+            Instantiates a new piece 
+            </summary>
+            <param name="name"></param>
+            <param name="team"></param>
+            <param name="model"></param>
+        </member>
+        <member name="M:Stufkan.Game.Piece.ToString">
+            <summary>
+            Override of ToString that returns the piece name and team
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Stufkan.Game.Piece.Model">
+            <summary>
+            The model depicting the piece
+            </summary>
+        </member>
+        <member name="P:Stufkan.Game.Piece.Name">
+            <summary>
+            The name of the piece
+            </summary>
+        </member>
+        <member name="P:Stufkan.Game.Piece.Team">
+            <summary>
+            The team the piece belongs to
+            </summary>
+        </member>
+        <member name="T:Stufkan.Game.BoardPatternCollection">
+            <summary>
+            A collection of LifePatterns with a describing name
+            </summary>
+        </member>
+        <member name="M:Stufkan.Game.BoardPatternCollection.#ctor(System.String)">
+            <summary>
+            Creates a LifePatternCollection with a name
+            </summary>
+            <param name="name">the name to describe the collection of LifePatterns</param>
+        </member>
+        <member name="M:Stufkan.Game.BoardPatternCollection.IndexOf(Stufkan.Game.BoardPattern)">
+            <summary>
+            Searches for the LifePattern and returns the zerobased index of the first instance of the LifePattern
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Stufkan.Game.BoardPatternCollection.Insert(System.Int32,Stufkan.Game.BoardPattern)">
+            <summary>
+            Inserts a LifePattern at index
+            </summary>
+            <param name="index">The index to insert the LifePattern at </param>
+            <param name="item">The LifePattern to insert</param>
+        </member>
+        <member name="M:Stufkan.Game.BoardPatternCollection.RemoveAt(System.Int32)">
+            <summary>
+            Removes the LifePattern at index
+            </summary>
+            <param name="index">The index of the LifePattern to remove</param>
+        </member>
+        <member name="M:Stufkan.Game.BoardPatternCollection.Add(Stufkan.Game.BoardPattern)">
+            <summary>
+            Adds the specified item to the LifePatternCollection
+            </summary>
+            <param name="item">The item to add to the LifePatternCollection</param>
+        </member>
+        <member name="M:Stufkan.Game.BoardPatternCollection.Clear">
+            <summary>
+            Clears the LifePatternCollection for items
+            </summary>
+        </member>
+        <member name="M:Stufkan.Game.BoardPatternCollection.Contains(Stufkan.Game.BoardPattern)">
+            <summary>
+            Returns if the specified item is in the LifePatternCollection
+            </summary>
+            <param name="item">The item to search for</param>
+            <returns>If the item is in the LifePatternCollection</returns>
+        </member>
+        <member name="M:Stufkan.Game.BoardPatternCollection.CopyTo(Stufkan.Game.BoardPattern[],System.Int32)">
+            <summary>
+            Copies the entire list to the specified array, starting from arrayIndex
+            </summary>
+            <param name="array">The array to copy to</param>
+            <param name="arrayIndex">The index to start copying from</param>
+        </member>
+        <member name="M:Stufkan.Game.BoardPatternCollection.Remove(Stufkan.Game.BoardPattern)">
+            <summary>
+            Removes the specified LifePattern from the LifePatternCollection
+            </summary>
+            <param name="item">The LifePattern to remove</param>
+            <returns></returns>
+        </member>
+        <member name="M:Stufkan.Game.BoardPatternCollection.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the LifePatternCollection
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Stufkan.Game.BoardPatternCollection.Grid">
+            <summary>
+            gets the grid from the first pattern in the collection 
+            </summary>
+        </member>
+        <member name="P:Stufkan.Game.BoardPatternCollection.Item(System.Int32)">
+            <summary>
+            Sets or gets the specified index of the patterncollection of the LifePattern
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Stufkan.Game.BoardPatternCollection.Count">
+            <summary>
+            The number of items in the LifePatternCollection
+            </summary>
+        </member>
+        <member name="P:Stufkan.Game.BoardPatternCollection.IsReadOnly">
+            <summary>
+            If the LifePatternCollection is ReadOnly
+            </summary>
+        </member>
+        <member name="T:Stufkan.Game.GameBoard">
+            <summary>
+            Instantiates a board with functionality to create boardgames. (Turncontol, teams)
+            </summary>
+        </member>
+        <member name="M:Stufkan.Game.GameBoard.#ctor">
+            <summary>
+            Instantiates a new gameboard.
+            </summary>
+        </member>
+        <member name="P:Stufkan.Game.GameBoard.TurnControl">
+            <summary>
+            The turncontrol that keeps track of the teams participating and whose turn it is.
+            </summary>
+        </member>
+        <member name="T:Stufkan.Game.Team">
+            <summary>
+            An interface describing a team playing on a board.
+            </summary>
+        </member>
+        <member name="M:Stufkan.Game.Team.#ctor(System.String,System.Int32)">
+            <summary>
+            Instantiates a team with a name and an id
+            </summary>
+            <param name="name"></param>
+            <param name="id"></param>
+        </member>
+        <member name="M:Stufkan.Game.Team.ToString">
+            <summary>
+            Override of ToString returning the team id and name
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Stufkan.Game.Team.Add(Stufkan.Game.Piece)">
+            <summary>
+            Adds a piece to the list of pieces
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:Stufkan.Game.Team.Clear">
+            <summary>
+            Clears the list of pieces
+            </summary>
+        </member>
+        <member name="M:Stufkan.Game.Team.Contains(Stufkan.Game.Piece)">
+            <summary>
+            Checks if the piece is in the list of pieces
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Stufkan.Game.Team.CopyTo(Stufkan.Game.Piece[],System.Int32)">
+            <summary>
+            Copies the array to another array from the arrayindex
+            </summary>
+            <param name="array">The destination array</param>
+            <param name="arrayIndex">The index to start the copying from</param>
+        </member>
+        <member name="M:Stufkan.Game.Team.Remove(Stufkan.Game.Piece)">
+            <summary>
+            Removes the piece from the list of pieces
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Stufkan.Game.Team.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the list
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Stufkan.Game.Team.Name">
+            <summary>
+            The name of the team
+            </summary>
+        </member>
+        <member name="P:Stufkan.Game.Team.ID">
+            <summary>
+            An ID to identify the team
+            </summary>
+        </member>
+        <member name="P:Stufkan.Game.Team.Pieces">
+            <summary>
+            A list of pieces accesible to the team
+            </summary>
+        </member>
+        <member name="P:Stufkan.Game.Team.Count">
+            <summary>
+            The number of pieces
+            </summary>
+        </member>
+        <member name="P:Stufkan.Game.Team.IsReadOnly">
+            <summary>
+            If the list of pieces is readonly
+            </summary>
+        </member>
+    </members>
+</doc>
